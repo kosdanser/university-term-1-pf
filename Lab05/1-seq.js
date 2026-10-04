@@ -15,15 +15,7 @@ function seq(...args) {
         throw new Error('All arguments must be functions');
     }
 
-    return function(y) {
-        if (typeof y === 'number') {
-            return args.reduceRight((number, fn) => fn(number), y);
-        }
-        else if (typeof y === 'function') {
-            return seq(...args, y);
-        }
-        else {
-            throw new Error('Argument must be a number or a function');
-        }
+    return function(...newArgs) {
+        return seq(...args, ...newArgs);
     }
 }
